@@ -3,11 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Palavras do Dia em Inglês</title>
+    <title>EnglishDaily - Palavras novas todos os dia em Inglês</title>
+    <meta
+      name="description"
+      content="Aprenda algumas palavras em inglês por dia!"
+    />
+    <meta
+      name="keywords"
+      content="palavras em inglês, aprendizado de inglês, vocabulário em inglês, daily English words, EnglishDaily"
+    />
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
     />
+    <link rel="icon" href="./assets/favicon.png" type="image/png" />
     <style>
       .clock {
         font-weight: bold;
@@ -27,7 +36,7 @@
       <span class="clock text-lg"></span>
     </header>
 
-    <main class="container mx-auto py-4 p-2">
+    <main class="container mx-auto min-h-screen py-4 p-2">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="bg-gray-800 shadow-md rounded-md p-4">
           <h2 class="text-lg font-light mb-2">Pronouns - Pronomes</h2>
@@ -63,6 +72,25 @@
         </div>
       </div>
     </main>
+
+    <footer class="bg-gray-800 text-white py-4 text-center w-full">
+      <p class="text-sm">
+        Projeto open source licenciado sob a
+        <a
+          href="https://opensource.org/licenses/MIT"
+          class="underline"
+          target="_blank"
+          >Licença MIT</a
+        >
+        por
+        <a
+          href="https://www.linkedin.com/in/phricardorj/"
+          class="underline"
+          target="_blank"
+          >@phricardorj</a
+        >!
+      </p>
+    </footer>
 
     <script src="./assets/scripts/index.js" type="module"></script>
   </body>
