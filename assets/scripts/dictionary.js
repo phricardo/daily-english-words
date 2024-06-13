@@ -1,4 +1,6 @@
-const pronouns = [
+import { getFormattedCurrentDateTime } from "./getFormattedDate.js";
+
+export const pronouns = [
   { english: "I", portuguese: "eu" },
   { english: "you", portuguese: "você" },
   { english: "he", portuguese: "ele" },
@@ -44,7 +46,7 @@ const pronouns = [
   { english: "anything", portuguese: "qualquer coisa" },
 ];
 
-const verbs = [
+export const verbs = [
   { english: "be", portuguese: "ser/estar" },
   { english: "have", portuguese: "ter" },
   { english: "do", portuguese: "fazer" },
@@ -169,7 +171,7 @@ const verbs = [
   { english: "recognize", portuguese: "reconhecer" },
 ];
 
-const substantives = [
+export const substantives = [
   { english: "time", portuguese: "tempo" },
   { english: "person", portuguese: "pessoa" },
   { english: "year", portuguese: "ano" },
@@ -197,7 +199,7 @@ const substantives = [
   { english: "fact", portuguese: "fato" },
 ];
 
-const adjectives = [
+export const adjectives = [
   { english: "good", portuguese: "bom" },
   { english: "new", portuguese: "novo" },
   { english: "first", portuguese: "primeiro" },
@@ -282,7 +284,7 @@ const adjectives = [
   { english: "rude", portuguese: "grosseiro" },
 ];
 
-const connectives = [
+export const connectives = [
   { english: "and", portuguese: "e" },
   { english: "but", portuguese: "mas" },
   { english: "or", portuguese: "ou" },
@@ -350,41 +352,7 @@ const connectives = [
   { english: "most", portuguese: "mais" },
 ];
 
-function getRandomWords(list, n) {
-  const shuffled = list.sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, n);
-}
-
-const getFormattedCurrentDateTime = () => {
-  const now = new Date();
-
-  const options = {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: false,
-  };
-
-  const formatter = new Intl.DateTimeFormat(navigator.language, options);
-  return formatter.format(now);
-};
-
-const updateClock = (element) =>
-  (element.textContent = getFormattedCurrentDateTime());
-
-function displayWords(list, id) {
-  const ul = document.getElementById(id);
-  list.forEach((word) => {
-    const li = document.createElement("li");
-    li.innerHTML = `<strong>${word.english}</strong> - ${word.portuguese}`;
-    ul.appendChild(li);
-  });
-}
-
-const getWords = () => {
+export const fetchSavedWords = () => {
   const savedWords = localStorage.getItem("savedWords");
   if (savedWords) {
     const data = JSON.parse(savedWords);
@@ -393,30 +361,14 @@ const getWords = () => {
     if (savedDay === currentDay) return data;
   } else {
     const words = {
-      pronouns: getRandomWords(pronouns, 3),
-      verbs: getRandomWords(verbs, 5),
-      substantives: getRandomWords(substantives, 10),
-      adjectives: getRandomWords(adjectives, 5),
-      connectives: getRandomWords(connectives, 2),
+      pronouns: getRandomDictionaryWords(pronouns, 3),
+      verbs: getRandomDictionaryWords(verbs, 5),
+      substantives: getRandomDictionaryWords(substantives, 10),
+      adjectives: getRandomDictionaryWords(adjectives, 5),
+      connectives: getRandomDictionaryWords(connectives, 2),
       createdAt: getFormattedCurrentDateTime().split(",")[0],
     };
     localStorage.setItem("savedWords", JSON.stringify(words));
     return words;
   }
 };
-
-document.addEventListener("DOMContentLoaded", function () {
-  const words = getWords();
-
-  displayWords(words.pronouns, "pronouns-list");
-  displayWords(words.verbs, "verbs-list");
-  displayWords(words.substantives, "substantives-list");
-  displayWords(words.adjectives, "adjectives-list");
-  displayWords(words.connectives, "connectives-list");
-
-  updateClock(document.querySelector(".clock"));
-
-  setInterval(() => {
-    updateClock(document.querySelector(".clock"));
-  }, 1000);
-});
