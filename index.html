@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Palavras do Dia</title>
+    <style>
+      *,
+      h1,
+      h2,
+      p {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      h1,
+      h2,
+      p {
+        margin-bottom: 0.5rem;
+      }
+
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .section {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        width: 100%;
+        flex: 1 1 300px;
+      }
+
+      .section h2 {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        color: #837f7f;
+        font-weight: lighter;
+      }
+
+      .word-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        font-size: 1rem;
+      }
+
+      .word-list li {
+        margin-bottom: 5px;
+      }
+
+      .word-list li strong {
+        font-weight: bold;
+      }
+
+      header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      header,
+      main {
+        padding: 1rem;
+      }
+
+      .clock {
+        font-weight: bold;
+        letter-spacing: 0.2rem;
+        font-family: "Consolas", "Franklin Gothic Medium", "Arial Narrow", Arial,
+          sans-serif;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>Daily English Words</h1>
+      <p>Aprenda algumas palavras em inglês por dia!</p>
+      <span class="clock"></span>
+    </header>
+
+    <main>
+      <div class="container">
+        <div class="section">
+          <h2>Pronouns - Pronomes</h2>
+          <ul class="word-list" id="pronouns-list"></ul>
+        </div>
+
+        <div class="section">
+          <h2>Verbs - Verbos</h2>
+          <ul class="word-list" id="verbs-list"></ul>
+        </div>
+
+        <div class="section">
+          <h2>Nouns / Substantives - Substantivos</h2>
+          <ul class="word-list" id="substantives-list"></ul>
+        </div>
+
+        <div class="section">
+          <h2>Adjectives - Adjetivos</h2>
+          <ul class="word-list" id="adjectives-list"></ul>
+        </div>
+
+        <div class="section">
+          <h2>Connectives - Conectivos</h2>
+          <ul class="word-list" id="connectives-list"></ul>
+        </div>
+      </div>
+    </main>
+
+    <script src="./index.js"></script>
+  </body>
+</html>
