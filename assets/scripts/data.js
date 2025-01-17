@@ -1,5 +1,3 @@
-import { getFormattedCurrentDateTime } from "./getFormattedDate.js";
-
 export const pronouns = [
   { english: "I", portuguese: "eu" },
   { english: "you", portuguese: "você" },
@@ -351,24 +349,3 @@ export const connectives = [
   { english: "more", portuguese: "mais" },
   { english: "most", portuguese: "mais" },
 ];
-
-export const fetchSavedWords = () => {
-  const savedWords = localStorage.getItem("savedWords");
-  if (savedWords) {
-    const data = JSON.parse(savedWords);
-    const savedDay = data.createdAt;
-    const currentDay = getFormattedCurrentDateTime().split(",")[0];
-    if (savedDay === currentDay) return data;
-  } else {
-    const words = {
-      pronouns: getRandomDictionaryWords(pronouns, 3),
-      verbs: getRandomDictionaryWords(verbs, 5),
-      substantives: getRandomDictionaryWords(substantives, 10),
-      adjectives: getRandomDictionaryWords(adjectives, 5),
-      connectives: getRandomDictionaryWords(connectives, 2),
-      createdAt: getFormattedCurrentDateTime().split(",")[0],
-    };
-    localStorage.setItem("savedWords", JSON.stringify(words));
-    return words;
-  }
-};

@@ -1,5 +1,64 @@
-import { fetchSavedWords } from "./dictionary.js";
-import { getFormattedCurrentDateTime } from "./getFormattedDate.js";
+import {
+  pronouns,
+  connectives,
+  substantives,
+  verbs,
+  adjectives,
+} from "./data.js";
+
+function getFormattedCurrentDateTime() {
+  const formatter = new Intl.DateTimeFormat(navigator.language, {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  });
+
+  return formatter.format(new Date());
+}
+
+function getRandomDictionaryWords(dictionary, count) {
+  const randomWords = [];
+  for (let i = 0; i < count; i++) {
+    const randomWord =
+      dictionary[Math.floor(Math.random() * dictionary.length)];
+    randomWords.push(randomWord);
+  }
+  return randomWords;
+}
+
+export const fetchSavedWords = () => {
+  const savedWords = localStorage.getItem("savedWords");
+
+  if (savedWords) {
+    const data = JSON.parse(savedWords);
+    const savedDay = data.createdAt;
+    const currentDay = getFormattedCurrentDateTime().split(",")[0];
+
+    if (savedDay != currentDay) {
+      localStorage.removeItem("savedWords");
+      window.location.reload();
+    }
+
+    return data;
+  }
+
+  const words = {
+    verbs: getRandomDictionaryWords(verbs, 5),
+    pronouns: getRandomDictionaryWords(pronouns, 3),
+    adjectives: getRandomDictionaryWords(adjectives, 5),
+    connectives: getRandomDictionaryWords(connectives, 2),
+    substantives: getRandomDictionaryWords(substantives, 10),
+    createdAt: getFormattedCurrentDateTime().split(",")[0],
+  };
+
+  localStorage.setItem("savedWords", JSON.stringify(words));
+
+  return words;
+};
 
 function displayWords(list, id) {
   const ul = document.getElementById(id);
