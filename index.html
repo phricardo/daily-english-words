@@ -24,6 +24,9 @@
         font-family: "Consolas", "Franklin Gothic Medium", "Arial Narrow", Arial,
           sans-serif;
       }
+      .hover-border-1rem:hover {
+        border: 0.125rem solid #89cff0;
+      }
     </style>
   </head>
   <body
@@ -51,17 +54,23 @@
 
     <main class="container mx-auto min-h-screen py-4 p-2">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="bg-gray-800 shadow-md rounded-md p-4">
+        <div
+          class="bg-gray-800 shadow-md rounded-md p-4 transition duration-300 transform hover:scale-105 hover-border-1rem"
+        >
           <h2 class="text-lg font-light mb-2">Pronouns - Pronomes</h2>
           <ul id="pronouns-list" class="list-none list-inside text-base"></ul>
         </div>
 
-        <div class="bg-gray-800 shadow-md rounded-md p-4">
+        <div
+          class="bg-gray-800 shadow-md rounded-md p-4 transition duration-300 transform hover:scale-105 hover-border-1rem"
+        >
           <h2 class="text-lg font-light mb-2">Verbs - Verbos</h2>
           <ul id="verbs-list" class="list-none list-inside text-base"></ul>
         </div>
 
-        <div class="bg-gray-800 shadow-md rounded-md p-4">
+        <div
+          class="bg-gray-800 shadow-md rounded-md p-4 transition duration-300 transform hover:scale-105 hover-border-1rem"
+        >
           <h2 class="text-lg font-light mb-2">
             Nouns / Substantives - Substantivos
           </h2>
@@ -71,12 +80,16 @@
           ></ul>
         </div>
 
-        <div class="bg-gray-800 shadow-md rounded-md p-4">
+        <div
+          class="bg-gray-800 shadow-md rounded-md p-4 transition duration-300 transform hover:scale-105 hover-border-1rem"
+        >
           <h2 class="text-lg font-light mb-2">Adjectives - Adjetivos</h2>
           <ul id="adjectives-list" class="list-none list-inside text-base"></ul>
         </div>
 
-        <div class="bg-gray-800 shadow-md rounded-md p-4">
+        <div
+          class="bg-gray-800 shadow-md rounded-md p-4 transition duration-300 transform hover:scale-105 hover-border-1rem"
+        >
           <h2 class="text-lg font-light mb-2">Connectives - Conectivos</h2>
           <ul
             id="connectives-list"

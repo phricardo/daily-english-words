@@ -56,12 +56,24 @@ export const fetchSavedWords = () => {
 
   const seed = getSeedForDay();
 
+  const maxWords = 5;
+
   const words = {
-    verbs: getDeterministicDictionaryWords(verbs, 5, seed, 1),
-    pronouns: getDeterministicDictionaryWords(pronouns, 3, seed, 2),
-    adjectives: getDeterministicDictionaryWords(adjectives, 5, seed, 3),
-    connectives: getDeterministicDictionaryWords(connectives, 2, seed, 4),
-    substantives: getDeterministicDictionaryWords(substantives, 10, seed, 5),
+    verbs: getDeterministicDictionaryWords(verbs, maxWords, seed, 1),
+    pronouns: getDeterministicDictionaryWords(pronouns, maxWords, seed, 2),
+    adjectives: getDeterministicDictionaryWords(adjectives, maxWords, seed, 3),
+    connectives: getDeterministicDictionaryWords(
+      connectives,
+      maxWords,
+      seed,
+      4
+    ),
+    substantives: getDeterministicDictionaryWords(
+      substantives,
+      maxWords,
+      seed,
+      5
+    ),
     createdAt: currentDay,
   };
 
