@@ -20,14 +20,14 @@ function getFormattedCurrentDateTime() {
 }
 
 function getSeedForDay() {
-  const hoje = new Date();
-  const ano = hoje.getFullYear();
-  const mes = hoje.getMonth() + 1;
-  const dia = hoje.getDate();
-  const dataStr = `${ano}${mes < 10 ? "0" : ""}${mes}${
-    dia < 10 ? "0" : ""
-  }${dia}`;
-  return parseInt(dataStr, 10);
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = today.getMonth() + 1;
+  const day = today.getDate();
+  const dateStr = `${year}${month < 10 ? "0" : ""}${month}${
+    day < 10 ? "0" : ""
+  }${day}`;
+  return parseInt(dateStr, 10);
 }
 
 function getDeterministicDictionaryWords(dictionary, count, seed, offset = 0) {
