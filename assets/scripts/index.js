@@ -106,3 +106,51 @@ document.addEventListener("DOMContentLoaded", function () {
       getFormattedCurrentDateTime();
   }, 1000);
 });
+
+// -- Sentences -- //
+function generateSentence(words) {
+  const randomElement = (array) =>
+    array[Math.floor(Math.random() * array.length)];
+  let sentence;
+  do {
+    const pronoun1 = randomElement(words.pronouns).english;
+    const verb1 = randomElement(words.verbs).english;
+    const adjective = randomElement(words.adjectives).english;
+    const noun1 = randomElement(words.substantives).english;
+    const connective = randomElement(words.connectives).english;
+    const pronoun2 = randomElement(words.pronouns).english;
+    const verb2 = randomElement(words.verbs).english;
+    const noun2 = randomElement(words.substantives).english;
+
+    sentence = `${pronoun1} ${verb1} ${adjective} ${noun1} ${connective} ${pronoun2} ${verb2} ${noun2}.`;
+  } while (!validateSentence(sentence, words));
+  return sentence;
+}
+
+function validateSentence(sentence, words) {
+  const tokens = sentence.replace(/\./g, "").split(" ");
+  if (tokens.length !== 8) {
+    return false;
+  }
+  const expectedCategories = [
+    { list: words.pronouns, label: "pronoun" },
+    { list: words.verbs, label: "verb" },
+    { list: words.adjectives, label: "adjective" },
+    { list: words.substantives, label: "noun" },
+    { list: words.connectives, label: "connective" },
+    { list: words.pronouns, label: "pronoun" },
+    { list: words.verbs, label: "verb" },
+    { list: words.substantives, label: "noun" },
+  ];
+  for (let i = 0; i < tokens.length; i++) {
+    const token = tokens[i].toLowerCase();
+    const isValid = expectedCategories[i].list.some(
+      (word) => word.english.toLowerCase() === token
+    );
+    if (!isValid) {
+      return false;
+    }
+  }
+  return true;
+}
+// -- Sentences -- //
