@@ -16,47 +16,56 @@ function getFormattedCurrentDateTime() {
     second: "2-digit",
     hour12: false,
   });
-
   return formatter.format(new Date());
 }
 
-function getRandomDictionaryWords(dictionary, count) {
-  const randomWords = [];
+function getSeedForDay() {
+  const hoje = new Date();
+  const ano = hoje.getFullYear();
+  const mes = hoje.getMonth() + 1;
+  const dia = hoje.getDate();
+  const dataStr = `${ano}${mes < 10 ? "0" : ""}${mes}${
+    dia < 10 ? "0" : ""
+  }${dia}`;
+  return parseInt(dataStr, 10);
+}
+
+function getDeterministicDictionaryWords(dictionary, count, seed, offset = 0) {
+  const words = [];
+  const startIndex = (seed + offset) % dictionary.length;
   for (let i = 0; i < count; i++) {
-    const randomWord =
-      dictionary[Math.floor(Math.random() * dictionary.length)];
-    randomWords.push(randomWord);
+    const index = (startIndex + i) % dictionary.length;
+    words.push(dictionary[index]);
   }
-  return randomWords;
+  return words;
 }
 
 export const fetchSavedWords = () => {
   const savedWords = localStorage.getItem("savedWords");
+  const currentDay = getFormattedCurrentDateTime().split(",")[0];
 
   if (savedWords) {
     const data = JSON.parse(savedWords);
     const savedDay = data.createdAt;
-    const currentDay = getFormattedCurrentDateTime().split(",")[0];
-
-    if (savedDay != currentDay) {
+    if (savedDay !== currentDay) {
       localStorage.removeItem("savedWords");
       window.location.reload();
     }
-
     return data;
   }
 
+  const seed = getSeedForDay();
+
   const words = {
-    verbs: getRandomDictionaryWords(verbs, 5),
-    pronouns: getRandomDictionaryWords(pronouns, 3),
-    adjectives: getRandomDictionaryWords(adjectives, 5),
-    connectives: getRandomDictionaryWords(connectives, 2),
-    substantives: getRandomDictionaryWords(substantives, 10),
-    createdAt: getFormattedCurrentDateTime().split(",")[0],
+    verbs: getDeterministicDictionaryWords(verbs, 5, seed, 1),
+    pronouns: getDeterministicDictionaryWords(pronouns, 3, seed, 2),
+    adjectives: getDeterministicDictionaryWords(adjectives, 5, seed, 3),
+    connectives: getDeterministicDictionaryWords(connectives, 2, seed, 4),
+    substantives: getDeterministicDictionaryWords(substantives, 10, seed, 5),
+    createdAt: currentDay,
   };
 
   localStorage.setItem("savedWords", JSON.stringify(words));
-
   return words;
 };
 
@@ -79,6 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
   displayWords(words.connectives, "connectives-list");
 
   document.querySelector(".clock").textContent = getFormattedCurrentDateTime();
+
   setInterval(() => {
     document.querySelector(".clock").textContent =
       getFormattedCurrentDateTime();
